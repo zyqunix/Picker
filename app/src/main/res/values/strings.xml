@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Picker</string>
+    <string name="players">Players</string>
+    <string name="enter_amount_of_players">Enter Amount of Players</string>
+    <string name="pick_random_player">Pick Random Player</string>
+    <string name="no_players">No Players!</string>
+    <string name="numbers">Numbers</string>
+    <string name="items">Items</string>
+
+</resources>
