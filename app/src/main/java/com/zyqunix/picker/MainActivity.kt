@@ -65,7 +65,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             radioOptions.forEach { text ->
-                Column (
+                Row (
                     Modifier
                         .fillMaxWidth()
                         .selectable(
