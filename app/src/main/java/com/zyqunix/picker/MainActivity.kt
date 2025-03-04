@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -36,9 +37,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
-    var text by remember { mutableStateOf("No Players!") }
+    var text by remember { mutableStateOf("Add Players") }
     var inputText by remember { mutableStateOf("") }
     var history by remember { mutableStateOf(listOf<String>()) }
+
+    val radioOptions = listOf("Players", "Numbers", "Items")
+    val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1]) }
+
 
     fun isValidPositiveInteger(value: String): Boolean {
         return value.toIntOrNull()?.let { it > 1 } == true
@@ -60,13 +65,42 @@ fun MainScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            radioOptions.forEach { text ->
+                Column (
+                    Modifier
+                        .fillMaxWidth()
+                        .selectable(
+                            selected = (text == selectedOption),
+                            onClick = {
+                                onOptionSelected(text)
+                            }
+                        )
+                        .padding(horizontal = 10.dp)
+                        .align(Alignment.TopCenter)
+                ) {
+                    RadioButton(
+                        selected = (text == selectedOption),
+                        onClick = { onOptionSelected(text) }
+                    )
+                    Text(
+                        text = text,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+            }
+
             Text(
                 text = buildAnnotatedString {
-                    append("Player ")
-                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(text.removePrefix("Player ").removeSuffix(" was chosen!"))
+                    if (text == "Add Players") {
+                        text = "Add Players"
+                    } else {
+                        append("Player ")
+                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(text.removePrefix("Player ").removeSuffix(" was chosen!")) }
+                        append(" was chosen!")
                     }
-                    append(" was chosen!")
+
                 },
                 style = MaterialTheme.typography.titleLarge
             )
@@ -96,7 +130,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
             if (history.isNotEmpty()) {
                 Text("History", style = MaterialTheme.typography.titleMedium)
                 Box(
-                    modifier = Modifier.fillMaxWidth().weight(1f)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
                 ) {
                     LazyColumn(
                         modifier = Modifier
