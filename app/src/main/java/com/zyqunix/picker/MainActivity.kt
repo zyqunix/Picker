@@ -59,8 +59,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     ) {
         Column(
             modifier = modifier
-                .fillMaxSize()
-                .padding(16.dp),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(
@@ -81,7 +80,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                         Text(
                             text = option,
                             style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(start = 16.dp)
+                            modifier = Modifier.padding(end = 16.dp)
                         )
                     }
                 }
