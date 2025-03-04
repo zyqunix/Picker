@@ -44,7 +44,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val radioOptions = listOf("Players", "Numbers", "Items")
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[1]) }
 
-
     fun isValidPositiveInteger(value: String): Boolean {
         return value.toIntOrNull()?.let { it > 1 } == true
     }
@@ -64,28 +63,23 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            radioOptions.forEach { text ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .selectable(
-                            selected = (text == selectedOption),
-                            onClick = {
-                                onOptionSelected(text)
-                            }
-                        )
-                        .padding(horizontal = 10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 10.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                radioOptions.forEach { option ->
                     Row(
-                        horizontalArrangement = Arrangement.Start
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
-                            selected = (text == selectedOption),
-                            onClick = { onOptionSelected(text) }
+                            selected = (option == selectedOption),
+                            onClick = { onOptionSelected(option) }
                         )
                         Text(
-                            text = text,
+                            text = option,
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(start = 16.dp)
                         )
@@ -96,14 +90,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
             Text(
                 text = buildAnnotatedString {
                     if (text == "Add Players") {
-                        text = "Add Players"
+                        append("Add Players")
                     } else {
                         append("Player ")
                         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append(text.removePrefix("Player ").removeSuffix(" was chosen!")) }
+                            append(text.removePrefix("Player ").removeSuffix(" was chosen!"))
+                        }
                         append(" was chosen!")
                     }
-
                 },
                 style = MaterialTheme.typography.titleLarge
             )
