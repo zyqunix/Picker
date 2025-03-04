@@ -75,7 +75,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
                             }
                         )
                         .padding(horizontal = 10.dp)
-                        .align(Alignment.TopCenter)
                 ) {
                     RadioButton(
                         selected = (text == selectedOption),
