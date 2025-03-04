@@ -75,7 +75,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                             }
                         )
                         .padding(horizontal = 10.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     RadioButton(
                         selected = (text == selectedOption),
