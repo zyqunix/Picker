@@ -65,8 +65,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             radioOptions.forEach { text ->
-                Row (
-                    Modifier
+                Row(
+                    modifier = Modifier
                         .fillMaxWidth()
                         .selectable(
                             selected = (text == selectedOption),
@@ -74,7 +74,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
                                 onOptionSelected(text)
                             }
                         )
-                        .padding(horizontal = 10.dp)
+                        .padding(horizontal = 10.dp),
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     RadioButton(
                         selected = (text == selectedOption),
