@@ -11,6 +11,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zyqunix.picker.ui.theme.PickerTheme
@@ -40,6 +44,10 @@ fun MainScreen(modifier: Modifier = Modifier) {
         return value.toIntOrNull()?.let { it > 0 } == true
     }
 
+    fun pickRandom(max: Int): Int {
+        return Random.nextInt(1, max + 1)
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -53,23 +61,29 @@ fun MainScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = text,
+                text = buildAnnotatedString {
+                    append("Player ")
+                    withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(text.removePrefix("Player ").removeSuffix(" was chosen!"))
+                    }
+                    append(" was chosen!")
+                },
                 style = MaterialTheme.typography.titleLarge
             )
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = inputText,
                 onValueChange = {
-                    if (isValidPositiveInteger(it)) {
+                    if (it.isEmpty() || isValidPositiveInteger(it)) {
                         inputText = it
                     }
                 },
-                label = { Text("Enter number of players") }
+                label = { Text("Enter a number of players") }
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 if (isValidPositiveInteger(inputText)) {
-                    val randomPlayer = Random.nextInt(1, inputText.toInt() + 1)
+                    val randomPlayer = pickRandom(inputText.toInt())
                     text = "Player $randomPlayer was chosen!"
                     history = history + "Player $randomPlayer"
                 } else {
