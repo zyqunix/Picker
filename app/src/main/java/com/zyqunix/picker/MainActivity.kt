@@ -41,7 +41,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     var history by remember { mutableStateOf(listOf<String>()) }
 
     fun isValidPositiveInteger(value: String): Boolean {
-        return value.toIntOrNull()?.let { it > 0 } == true
+        return value.toIntOrNull()?.let { it > 1 } == true
     }
 
     fun pickRandom(max: Int): Int {
@@ -87,7 +87,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     text = "Player $randomPlayer was chosen!"
                     history = history + "Player $randomPlayer"
                 } else {
-                    text = "Please add more than 0 Players"
+                    text = "Please add more than 1 Player"
                 }
             }) {
                 Text(text = "Pick Random Player")
