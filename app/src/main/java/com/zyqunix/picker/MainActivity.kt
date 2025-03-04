@@ -77,15 +77,19 @@ fun MainScreen(modifier: Modifier = Modifier) {
                         .padding(horizontal = 10.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    RadioButton(
-                        selected = (text == selectedOption),
-                        onClick = { onOptionSelected(text) }
-                    )
-                    Text(
-                        text = text,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
+                    Row(
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        RadioButton(
+                            selected = (text == selectedOption),
+                            onClick = { onOptionSelected(text) }
+                        )
+                        Text(
+                            text = text,
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(start = 16.dp)
+                        )
+                    }
                 }
             }
 
