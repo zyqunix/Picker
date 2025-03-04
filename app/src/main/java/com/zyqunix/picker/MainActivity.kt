@@ -63,7 +63,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
         ) {
             radioOptions.forEach { text ->
                 Column (
